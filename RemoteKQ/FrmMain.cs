@@ -191,7 +191,6 @@ namespace RemoteKQ
                 row[0] = item["recordDate"];
                 row[1] = item["location"];
                 dataTable.Rows.Add(row);
-                this.dgvInfo.Rows.Add(row);
             }
 
             this.dgvInfo.DataSource = dataTable;

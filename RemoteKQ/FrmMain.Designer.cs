@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtUserAgent = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnAuto = new System.Windows.Forms.Button();
+            this.btnCheckInfo = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.txtCaptcha = new System.Windows.Forms.TextBox();
@@ -51,26 +55,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dgvInfo = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSelectLocation = new System.Windows.Forms.Button();
             this.drpLocation = new System.Windows.Forms.ComboBox();
             this.btnGetPosInfo = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPos = new System.Windows.Forms.TextBox();
             this.linkPos = new System.Windows.Forms.LinkLabel();
-            this.dgvInfo = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCheckInfo = new System.Windows.Forms.Button();
             this.iconDeskTop = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnShowForm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnHideForm = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAuto = new System.Windows.Forms.Button();
             this.btnTopForm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancelTopForm = new System.Windows.Forms.ToolStripMenuItem();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtUserAgent = new System.Windows.Forms.TextBox();
+            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCaptcha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRandMin)).BeginInit();
@@ -110,6 +110,47 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(291, 465);
             this.panel1.TabIndex = 0;
+            // 
+            // txtUserAgent
+            // 
+            this.txtUserAgent.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtUserAgent.Location = new System.Drawing.Point(92, 273);
+            this.txtUserAgent.Name = "txtUserAgent";
+            this.txtUserAgent.Size = new System.Drawing.Size(176, 26);
+            this.txtUserAgent.TabIndex = 23;
+            this.txtUserAgent.TextChanged += new System.EventHandler(this.txtUserAgent_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 12F);
+            this.label7.Location = new System.Drawing.Point(6, 278);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 16);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "UserAgent";
+            // 
+            // btnAuto
+            // 
+            this.btnAuto.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnAuto.Location = new System.Drawing.Point(166, 389);
+            this.btnAuto.Name = "btnAuto";
+            this.btnAuto.Size = new System.Drawing.Size(102, 45);
+            this.btnAuto.TabIndex = 21;
+            this.btnAuto.Text = "自动打卡";
+            this.btnAuto.UseVisualStyleBackColor = true;
+            this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
+            // 
+            // btnCheckInfo
+            // 
+            this.btnCheckInfo.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnCheckInfo.Location = new System.Drawing.Point(186, 337);
+            this.btnCheckInfo.Name = "btnCheckInfo";
+            this.btnCheckInfo.Size = new System.Drawing.Size(82, 33);
+            this.btnCheckInfo.TabIndex = 20;
+            this.btnCheckInfo.Text = "查看记录";
+            this.btnCheckInfo.UseVisualStyleBackColor = true;
+            this.btnCheckInfo.Click += new System.EventHandler(this.btnCheckInfo_Click);
             // 
             // btnSave
             // 
@@ -321,6 +362,36 @@
             this.panel2.Size = new System.Drawing.Size(509, 465);
             this.panel2.TabIndex = 1;
             // 
+            // dgvInfo
+            // 
+            this.dgvInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.dgvInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvInfo.Location = new System.Drawing.Point(0, 137);
+            this.dgvInfo.Name = "dgvInfo";
+            this.dgvInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvInfo.RowTemplate.Height = 23;
+            this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvInfo.Size = new System.Drawing.Size(507, 326);
+            this.dgvInfo.TabIndex = 8;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "recordDate";
+            this.Column1.HeaderText = "打卡时间";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "location";
+            this.Column2.HeaderText = "打卡位置";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
             // btnSelectLocation
             // 
             this.btnSelectLocation.Font = new System.Drawing.Font("宋体", 12F);
@@ -384,47 +455,6 @@
             this.linkPos.Text = "点击获得坐标";
             this.linkPos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPos_LinkClicked);
             // 
-            // dgvInfo
-            // 
-            this.dgvInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dgvInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvInfo.Location = new System.Drawing.Point(0, 137);
-            this.dgvInfo.Name = "dgvInfo";
-            this.dgvInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvInfo.RowTemplate.Height = 23;
-            this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInfo.Size = new System.Drawing.Size(507, 326);
-            this.dgvInfo.TabIndex = 8;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "recordDate";
-            this.Column1.HeaderText = "打卡时间";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "location";
-            this.Column2.HeaderText = "打卡位置";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // btnCheckInfo
-            // 
-            this.btnCheckInfo.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnCheckInfo.Location = new System.Drawing.Point(184, 339);
-            this.btnCheckInfo.Name = "btnCheckInfo";
-            this.btnCheckInfo.Size = new System.Drawing.Size(82, 33);
-            this.btnCheckInfo.TabIndex = 20;
-            this.btnCheckInfo.Text = "查看记录";
-            this.btnCheckInfo.UseVisualStyleBackColor = true;
-            this.btnCheckInfo.Click += new System.EventHandler(this.btnCheckInfo_Click);
-            // 
             // iconDeskTop
             // 
             this.iconDeskTop.ContextMenuStrip = this.contextMenuStrip1;
@@ -441,72 +471,42 @@
             this.btnCancelTopForm,
             this.btnExit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 114);
             // 
             // btnShowForm
             // 
             this.btnShowForm.Name = "btnShowForm";
-            this.btnShowForm.Size = new System.Drawing.Size(180, 22);
+            this.btnShowForm.Size = new System.Drawing.Size(124, 22);
             this.btnShowForm.Text = "显示窗口";
             this.btnShowForm.Click += new System.EventHandler(this.btnShowForm_Click);
             // 
             // btnHideForm
             // 
             this.btnHideForm.Name = "btnHideForm";
-            this.btnHideForm.Size = new System.Drawing.Size(180, 22);
+            this.btnHideForm.Size = new System.Drawing.Size(124, 22);
             this.btnHideForm.Text = "隐藏窗口";
             this.btnHideForm.Click += new System.EventHandler(this.btnHideForm_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(180, 22);
-            this.btnExit.Text = "退出";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnAuto
-            // 
-            this.btnAuto.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnAuto.Location = new System.Drawing.Point(166, 389);
-            this.btnAuto.Name = "btnAuto";
-            this.btnAuto.Size = new System.Drawing.Size(102, 45);
-            this.btnAuto.TabIndex = 21;
-            this.btnAuto.Text = "自动打卡";
-            this.btnAuto.UseVisualStyleBackColor = true;
-            this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
             // btnTopForm
             // 
             this.btnTopForm.Name = "btnTopForm";
-            this.btnTopForm.Size = new System.Drawing.Size(180, 22);
+            this.btnTopForm.Size = new System.Drawing.Size(124, 22);
             this.btnTopForm.Text = "置顶窗口";
             this.btnTopForm.Click += new System.EventHandler(this.btnTopForm_Click);
             // 
             // btnCancelTopForm
             // 
             this.btnCancelTopForm.Name = "btnCancelTopForm";
-            this.btnCancelTopForm.Size = new System.Drawing.Size(180, 22);
+            this.btnCancelTopForm.Size = new System.Drawing.Size(124, 22);
             this.btnCancelTopForm.Text = "取消置顶";
             this.btnCancelTopForm.Click += new System.EventHandler(this.btnCancelTopForm_Click);
             // 
-            // label7
+            // btnExit
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 12F);
-            this.label7.Location = new System.Drawing.Point(6, 278);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 16);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "UserAgent";
-            // 
-            // txtUserAgent
-            // 
-            this.txtUserAgent.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtUserAgent.Location = new System.Drawing.Point(92, 273);
-            this.txtUserAgent.Name = "txtUserAgent";
-            this.txtUserAgent.Size = new System.Drawing.Size(176, 26);
-            this.txtUserAgent.TabIndex = 23;
-            this.txtUserAgent.TextChanged += new System.EventHandler(this.txtUserAgent_TextChanged);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(124, 22);
+            this.btnExit.Text = "退出";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // FrmMain
             // 
