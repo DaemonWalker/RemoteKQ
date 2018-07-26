@@ -67,6 +67,10 @@
             this.btnHideForm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAuto = new System.Windows.Forms.Button();
+            this.btnTopForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCancelTopForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtUserAgent = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCaptcha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRandMin)).BeginInit();
@@ -78,6 +82,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.txtUserAgent);
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btnAuto);
             this.panel1.Controls.Add(this.btnCheckInfo);
             this.panel1.Controls.Add(this.btnSave);
@@ -102,13 +108,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 415);
+            this.panel1.Size = new System.Drawing.Size(291, 465);
             this.panel1.TabIndex = 0;
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnSave.Location = new System.Drawing.Point(34, 357);
+            this.btnSave.Location = new System.Drawing.Point(46, 389);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(102, 45);
             this.btnSave.TabIndex = 19;
@@ -119,7 +125,7 @@
             // btnCheckIn
             // 
             this.btnCheckIn.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnCheckIn.Location = new System.Drawing.Point(78, 307);
+            this.btnCheckIn.Location = new System.Drawing.Point(90, 337);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(88, 33);
             this.btnCheckIn.TabIndex = 18;
@@ -130,7 +136,7 @@
             // txtCaptcha
             // 
             this.txtCaptcha.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtCaptcha.Location = new System.Drawing.Point(78, 85);
+            this.txtCaptcha.Location = new System.Drawing.Point(90, 85);
             this.txtCaptcha.Name = "txtCaptcha";
             this.txtCaptcha.Size = new System.Drawing.Size(70, 26);
             this.txtCaptcha.TabIndex = 17;
@@ -139,7 +145,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 12F);
-            this.label10.Location = new System.Drawing.Point(16, 90);
+            this.label10.Location = new System.Drawing.Point(27, 90);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 16);
             this.label10.TabIndex = 16;
@@ -148,7 +154,7 @@
             // picCaptcha
             // 
             this.picCaptcha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picCaptcha.Location = new System.Drawing.Point(154, 85);
+            this.picCaptcha.Location = new System.Drawing.Point(164, 85);
             this.picCaptcha.Name = "picCaptcha";
             this.picCaptcha.Size = new System.Drawing.Size(102, 59);
             this.picCaptcha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -160,7 +166,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 12F);
-            this.label9.Location = new System.Drawing.Point(31, 281);
+            this.label9.Location = new System.Drawing.Point(43, 310);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 16);
             this.label9.TabIndex = 14;
@@ -169,7 +175,7 @@
             // txtSelectedLocation
             // 
             this.txtSelectedLocation.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtSelectedLocation.Location = new System.Drawing.Point(80, 276);
+            this.txtSelectedLocation.Location = new System.Drawing.Point(92, 305);
             this.txtSelectedLocation.Name = "txtSelectedLocation";
             this.txtSelectedLocation.ReadOnly = true;
             this.txtSelectedLocation.Size = new System.Drawing.Size(176, 26);
@@ -179,7 +185,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 12F);
-            this.label6.Location = new System.Drawing.Point(31, 248);
+            this.label6.Location = new System.Drawing.Point(43, 246);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 16);
             this.label6.TabIndex = 11;
@@ -189,7 +195,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 12F);
-            this.label5.Location = new System.Drawing.Point(214, 248);
+            this.label5.Location = new System.Drawing.Point(226, 246);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 16);
             this.label5.TabIndex = 10;
@@ -198,7 +204,7 @@
             // txtRandMin
             // 
             this.txtRandMin.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtRandMin.Location = new System.Drawing.Point(80, 243);
+            this.txtRandMin.Location = new System.Drawing.Point(92, 241);
             this.txtRandMin.Maximum = new decimal(new int[] {
             30,
             0,
@@ -213,7 +219,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 12F);
-            this.label4.Location = new System.Drawing.Point(31, 215);
+            this.label4.Location = new System.Drawing.Point(43, 214);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 16);
             this.label4.TabIndex = 8;
@@ -223,7 +229,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 12F);
-            this.label3.Location = new System.Drawing.Point(31, 184);
+            this.label3.Location = new System.Drawing.Point(43, 184);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 16);
             this.label3.TabIndex = 7;
@@ -234,7 +240,7 @@
             this.timeEvening.CalendarFont = new System.Drawing.Font("宋体", 12F);
             this.timeEvening.Font = new System.Drawing.Font("宋体", 12F);
             this.timeEvening.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timeEvening.Location = new System.Drawing.Point(80, 210);
+            this.timeEvening.Location = new System.Drawing.Point(92, 209);
             this.timeEvening.Name = "timeEvening";
             this.timeEvening.Size = new System.Drawing.Size(175, 26);
             this.timeEvening.TabIndex = 6;
@@ -245,7 +251,7 @@
             this.timeMorning.CalendarFont = new System.Drawing.Font("宋体", 12F);
             this.timeMorning.Font = new System.Drawing.Font("宋体", 12F);
             this.timeMorning.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timeMorning.Location = new System.Drawing.Point(79, 177);
+            this.timeMorning.Location = new System.Drawing.Point(91, 177);
             this.timeMorning.Name = "timeMorning";
             this.timeMorning.Size = new System.Drawing.Size(175, 26);
             this.timeMorning.TabIndex = 5;
@@ -254,7 +260,7 @@
             // btnLogin
             // 
             this.btnLogin.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnLogin.Location = new System.Drawing.Point(78, 116);
+            this.btnLogin.Location = new System.Drawing.Point(90, 116);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(70, 28);
             this.btnLogin.TabIndex = 4;
@@ -265,7 +271,7 @@
             // txtPwd
             // 
             this.txtPwd.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPwd.Location = new System.Drawing.Point(78, 54);
+            this.txtPwd.Location = new System.Drawing.Point(90, 54);
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(176, 26);
@@ -274,7 +280,7 @@
             // txtUserID
             // 
             this.txtUserID.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtUserID.Location = new System.Drawing.Point(78, 23);
+            this.txtUserID.Location = new System.Drawing.Point(90, 23);
             this.txtUserID.Name = "txtUserID";
             this.txtUserID.Size = new System.Drawing.Size(176, 26);
             this.txtUserID.TabIndex = 2;
@@ -283,7 +289,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 12F);
-            this.label2.Location = new System.Drawing.Point(32, 59);
+            this.label2.Location = new System.Drawing.Point(43, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 1;
@@ -293,7 +299,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F);
-            this.label1.Location = new System.Drawing.Point(32, 28);
+            this.label1.Location = new System.Drawing.Point(43, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 16);
             this.label1.TabIndex = 0;
@@ -310,9 +316,9 @@
             this.panel2.Controls.Add(this.txtPos);
             this.panel2.Controls.Add(this.linkPos);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(278, 0);
+            this.panel2.Location = new System.Drawing.Point(291, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(522, 415);
+            this.panel2.Size = new System.Drawing.Size(509, 465);
             this.panel2.TabIndex = 1;
             // 
             // btnSelectLocation
@@ -386,12 +392,12 @@
             this.Column1,
             this.Column2});
             this.dgvInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvInfo.Location = new System.Drawing.Point(0, 142);
+            this.dgvInfo.Location = new System.Drawing.Point(0, 137);
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvInfo.RowTemplate.Height = 23;
             this.dgvInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInfo.Size = new System.Drawing.Size(520, 271);
+            this.dgvInfo.Size = new System.Drawing.Size(507, 326);
             this.dgvInfo.TabIndex = 8;
             // 
             // Column1
@@ -411,7 +417,7 @@
             // btnCheckInfo
             // 
             this.btnCheckInfo.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnCheckInfo.Location = new System.Drawing.Point(172, 307);
+            this.btnCheckInfo.Location = new System.Drawing.Point(184, 339);
             this.btnCheckInfo.Name = "btnCheckInfo";
             this.btnCheckInfo.Size = new System.Drawing.Size(82, 33);
             this.btnCheckInfo.TabIndex = 20;
@@ -431,34 +437,37 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnShowForm,
             this.btnHideForm,
+            this.btnTopForm,
+            this.btnCancelTopForm,
             this.btnExit});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 136);
             // 
             // btnShowForm
             // 
             this.btnShowForm.Name = "btnShowForm";
-            this.btnShowForm.Size = new System.Drawing.Size(124, 22);
+            this.btnShowForm.Size = new System.Drawing.Size(180, 22);
             this.btnShowForm.Text = "显示窗口";
             this.btnShowForm.Click += new System.EventHandler(this.btnShowForm_Click);
             // 
             // btnHideForm
             // 
             this.btnHideForm.Name = "btnHideForm";
-            this.btnHideForm.Size = new System.Drawing.Size(124, 22);
+            this.btnHideForm.Size = new System.Drawing.Size(180, 22);
             this.btnHideForm.Text = "隐藏窗口";
             this.btnHideForm.Click += new System.EventHandler(this.btnHideForm_Click);
             // 
             // btnExit
             // 
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(124, 22);
+            this.btnExit.Size = new System.Drawing.Size(180, 22);
             this.btnExit.Text = "退出";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnAuto
             // 
             this.btnAuto.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnAuto.Location = new System.Drawing.Point(154, 357);
+            this.btnAuto.Location = new System.Drawing.Point(166, 389);
             this.btnAuto.Name = "btnAuto";
             this.btnAuto.Size = new System.Drawing.Size(102, 45);
             this.btnAuto.TabIndex = 21;
@@ -466,11 +475,44 @@
             this.btnAuto.UseVisualStyleBackColor = true;
             this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
+            // btnTopForm
+            // 
+            this.btnTopForm.Name = "btnTopForm";
+            this.btnTopForm.Size = new System.Drawing.Size(180, 22);
+            this.btnTopForm.Text = "置顶窗口";
+            this.btnTopForm.Click += new System.EventHandler(this.btnTopForm_Click);
+            // 
+            // btnCancelTopForm
+            // 
+            this.btnCancelTopForm.Name = "btnCancelTopForm";
+            this.btnCancelTopForm.Size = new System.Drawing.Size(180, 22);
+            this.btnCancelTopForm.Text = "取消置顶";
+            this.btnCancelTopForm.Click += new System.EventHandler(this.btnCancelTopForm_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 12F);
+            this.label7.Location = new System.Drawing.Point(6, 278);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 16);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "UserAgent";
+            // 
+            // txtUserAgent
+            // 
+            this.txtUserAgent.Font = new System.Drawing.Font("宋体", 12F);
+            this.txtUserAgent.Location = new System.Drawing.Point(92, 273);
+            this.txtUserAgent.Name = "txtUserAgent";
+            this.txtUserAgent.Size = new System.Drawing.Size(176, 26);
+            this.txtUserAgent.TabIndex = 23;
+            this.txtUserAgent.TextChanged += new System.EventHandler(this.txtUserAgent_TextChanged);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 415);
+            this.ClientSize = new System.Drawing.Size(800, 465);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -529,6 +571,10 @@
         private System.Windows.Forms.ToolStripMenuItem btnShowForm;
         private System.Windows.Forms.ToolStripMenuItem btnHideForm;
         private System.Windows.Forms.ToolStripMenuItem btnExit;
+        private System.Windows.Forms.ToolStripMenuItem btnTopForm;
+        private System.Windows.Forms.ToolStripMenuItem btnCancelTopForm;
+        private System.Windows.Forms.TextBox txtUserAgent;
+        private System.Windows.Forms.Label label7;
     }
 }
 

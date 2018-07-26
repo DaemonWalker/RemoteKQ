@@ -64,7 +64,7 @@ namespace RemoteKQ
             var request = WebRequest.Create(url) as HttpWebRequest;
 
             //请求HEADER
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
+            request.UserAgent = this.Data.UserAgent;
             request.CookieContainer = this.cookieContainer;
 
             //获取返回字符串
@@ -89,7 +89,7 @@ namespace RemoteKQ
             request.Method = "POST";
             request.ContentType = @"application/x-www-form-urlencoded";
             request.CookieContainer = this.cookieContainer;
-            request.UserAgent = @"Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI P7-L07 Build/HuaweiP7-L07) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36";
+            request.UserAgent = this.Data.UserAgent;
 
             request.ContentLength = bytes.Length;
             var stream = request.GetRequestStream();
@@ -144,6 +144,7 @@ namespace RemoteKQ
                 this.timeMorning.Value = this.Data.MorningTime;
                 this.timeEvening.Value = this.Data.EveningTime;
                 this.txtRandMin.Value = this.Data.RandMin;
+                this.txtUserAgent.Text = this.Data.UserAgent;
 
                 json = this.WebGet($"https://sacasnap.neusoft.com/co/mobile/user/obtain?userId={this.Data.UserName}");
                 if (JToken.Parse(json)["code"].ToString() != "0")
@@ -168,9 +169,15 @@ namespace RemoteKQ
         private void GetKQTimeTable()
         {
             var orderList = this.WebGet(@"https://sacasnap.neusoft.com/co/mobile/microapp/list");
-            var url = JArray.Parse(JToken.Parse(JArray.Parse(JToken.Parse(orderList)["result"].ToString())[0].ToString())["appList"].ToString())
-                .Where(p => p["name"].ToString() == "外勤打卡").First()["redirectUri"].ToString();
+            var objs = JArray.Parse(JToken.Parse(JArray.Parse(JToken.Parse(orderList)["result"].ToString())[0].ToString())["appList"].ToString())
+                .Where(p => p["name"].ToString() == "外勤打卡");
 
+            if (objs == null || objs.Count() == 0)
+            {
+                ShowMsgMeesageBox("你无须打卡");
+            }
+
+            var url = objs.First()["redirectUri"].ToString();
             var msg = this.WebGet(url);
             var json = this.WebPost(@"https://wxservice.neusoft.com/snap/outAttendance?m=getOutAttendance", string.Empty);
 
@@ -196,14 +203,28 @@ namespace RemoteKQ
         private void CheckIN()
         {
             var orderList = this.WebGet(@"https://sacasnap.neusoft.com/co/mobile/microapp/list");
-            var url = JArray.Parse(JToken.Parse(JArray.Parse(JToken.Parse(orderList)["result"].ToString())[0].ToString())["appList"].ToString())
-                .Where(p => p["name"].ToString() == "外勤打卡").First()["redirectUri"].ToString();
+            var objs = JArray.Parse(JToken.Parse(JArray.Parse(JToken.Parse(orderList)["result"].ToString())[0].ToString())["appList"].ToString())
+                .Where(p => p["name"].ToString() == "外勤打卡");
 
+            //判断是否有打卡菜单
+            if (objs == null || objs.Count() == 0)
+            {
+                ShowMsgMeesageBox("你无须打卡");
+            }
+
+            var url = objs.First()["redirectUri"].ToString();
             var msg = this.WebGet(url);
-            //MessageBox.Show(msg);
+
             var data = @"{""photo"":"""",""place"":""" + this.Data.LocationStr + @"""}";
             data = "d=" + HttpUtility.UrlEncode(data);
-            //MessageBox.Show(this.WebPost("https://wxservice.neusoft.com/snap/outAttendance?m=outAttendanceApply", data));
+
+            var json = this.WebPost("https://wxservice.neusoft.com/snap/outAttendance?m=outAttendanceApply", data);
+
+            if (JToken.Parse(json)["code"].ToString() != "0")
+            {
+                ShowErrorMeesageBox("打卡失败");
+                return;
+            }
             GetKQTimeTable();
         }
 
@@ -215,6 +236,16 @@ namespace RemoteKQ
             this.Data = new Data();
             GetCaptcha();
         }
+
+        private void ShowMsgMeesageBox(string content, string title = "消息")
+        {
+            MessageBox.Show(content, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ShowErrorMeesageBox(string content, string title = "警告")
+        {
+            MessageBox.Show(content, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
         #endregion
 
         #region 事件
@@ -225,6 +256,7 @@ namespace RemoteKQ
         /// <param name="e"></param>
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            this.TopMost = true;
             this.ShowInTaskbar = false;
             LoadData();
         }
@@ -294,7 +326,17 @@ namespace RemoteKQ
             var devID = HttpUtility.UrlEncode(this.Data.DevID);
 
             var data = $@"devId={devID}&password={pwd}&checkCodeId={checkCode}&username={userID}&checkCode={captcha}";
-            var bytes = this.WebPost(@"https://sacasnap.neusoft.com/co/mobile/login", data);
+            var json = this.WebPost(@"https://sacasnap.neusoft.com/co/mobile/login", data);
+            var obj = JToken.Parse(json);
+            if (obj["code"].ToString() != "0")
+            {
+                ShowErrorMeesageBox(obj["msg"].ToString());
+                return;
+            }
+            else
+            {
+                ShowMsgMeesageBox("登陆成功");
+            }
             var cookie = GetCookies().First();
             this.cookieContainer.Add(new Cookie(cookie.Name, cookie.Value, "/", "wxservice.neusoft.com"));
         }
@@ -386,6 +428,8 @@ namespace RemoteKQ
         /// <param name="e"></param>
         private void btnAuto_Click(object sender, EventArgs e)
         {
+            btnAuto.Enabled = false;
+            btnAuto.Text = "自动打卡中...";
             Task.Run(() =>
             {
                 while (true)
@@ -475,6 +519,54 @@ namespace RemoteKQ
         {
             this.SaveData();
         }
+
+        /// <summary>
+        /// 置顶窗口点击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTopForm_Click(object sender, EventArgs e)
+        {
+            this.TopMost = true;
+        }
+
+        /// <summary>
+        /// 取消置顶点击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelTopForm_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+        }
+
+        /// <summary>
+        /// 修改UserAgent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtUserAgent_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.txtUserAgent.Text))
+            {
+                this.Data.UserAgent = @"Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI P7-L07 Build/HuaweiP7-L07) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36";
+                this.txtUserAgent.Text = this.Data.UserAgent;
+            }
+            else
+            {
+                this.Data.UserAgent = this.txtUserAgent.Text;
+            }
+        }
+
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         #endregion
     }
 
@@ -539,6 +631,12 @@ namespace RemoteKQ
         public string DevID { get; set; }
 
         /// <summary>
+        /// 浏览器标识
+        /// </summary>
+        [DataMember]
+        public string UserAgent { get; set; }
+
+        /// <summary>
         /// 初始化数据生成
         /// </summary>
         public Data()
@@ -546,6 +644,7 @@ namespace RemoteKQ
             Cookies = new List<Cookie>();
             CheckCode = Guid.NewGuid().ToString();
             DevID = Guid.NewGuid().ToString().Replace("-", "");
+            UserAgent = @"Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI P7-L07 Build/HuaweiP7-L07) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36";
         }
     }
 }
