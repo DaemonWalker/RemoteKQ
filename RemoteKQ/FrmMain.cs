@@ -645,6 +645,8 @@ namespace RemoteKQ
             CheckCode = Guid.NewGuid().ToString();
             DevID = Guid.NewGuid().ToString().Replace("-", "");
             UserAgent = @"Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI P7-L07 Build/HuaweiP7-L07) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36";
+            MorningTime = DateTime.Now;
+            EveningTime = DateTime.Now;
         }
     }
 }
