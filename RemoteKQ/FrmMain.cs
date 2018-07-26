@@ -225,6 +225,10 @@ namespace RemoteKQ
                 ShowErrorMeesageBox("打卡失败");
                 return;
             }
+            else
+            {
+                this.iconDeskTop.ShowBalloonTip(3000, "自动打卡", "打卡成功", ToolTipIcon.Info);
+            }
             GetKQTimeTable();
         }
 
