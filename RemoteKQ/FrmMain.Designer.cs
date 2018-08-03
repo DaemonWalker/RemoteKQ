@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCheckPlan = new System.Windows.Forms.Button();
             this.txtUserAgent = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnAuto = new System.Windows.Forms.Button();
@@ -82,6 +83,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnCheckPlan);
             this.panel1.Controls.Add(this.txtUserAgent);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btnAuto);
@@ -111,6 +113,17 @@
             this.panel1.Size = new System.Drawing.Size(291, 465);
             this.panel1.TabIndex = 0;
             // 
+            // btnCheckPlan
+            // 
+            this.btnCheckPlan.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnCheckPlan.Location = new System.Drawing.Point(193, 389);
+            this.btnCheckPlan.Name = "btnCheckPlan";
+            this.btnCheckPlan.Size = new System.Drawing.Size(82, 45);
+            this.btnCheckPlan.TabIndex = 24;
+            this.btnCheckPlan.Text = "打卡计划";
+            this.btnCheckPlan.UseVisualStyleBackColor = true;
+            this.btnCheckPlan.Click += new System.EventHandler(this.btnCheckPlan_Click);
+            // 
             // txtUserAgent
             // 
             this.txtUserAgent.Font = new System.Drawing.Font("宋体", 12F);
@@ -133,9 +146,9 @@
             // btnAuto
             // 
             this.btnAuto.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnAuto.Location = new System.Drawing.Point(166, 389);
+            this.btnAuto.Location = new System.Drawing.Point(105, 389);
             this.btnAuto.Name = "btnAuto";
-            this.btnAuto.Size = new System.Drawing.Size(102, 45);
+            this.btnAuto.Size = new System.Drawing.Size(82, 45);
             this.btnAuto.TabIndex = 21;
             this.btnAuto.Text = "自动打卡";
             this.btnAuto.UseVisualStyleBackColor = true;
@@ -155,9 +168,9 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F);
-            this.btnSave.Location = new System.Drawing.Point(46, 389);
+            this.btnSave.Location = new System.Drawing.Point(11, 389);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(102, 45);
+            this.btnSave.Size = new System.Drawing.Size(88, 45);
             this.btnSave.TabIndex = 19;
             this.btnSave.Text = "保存信息";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -517,6 +530,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自动打卡机";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
@@ -565,7 +579,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Button btnCheckInfo;
-        private System.Windows.Forms.NotifyIcon iconDeskTop;
         private System.Windows.Forms.Button btnAuto;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnShowForm;
@@ -575,6 +588,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnCancelTopForm;
         private System.Windows.Forms.TextBox txtUserAgent;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnCheckPlan;
+        public System.Windows.Forms.NotifyIcon iconDeskTop;
     }
 }
 

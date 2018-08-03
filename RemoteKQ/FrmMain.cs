@@ -26,7 +26,7 @@ namespace RemoteKQ
         /// <summary>
         /// 数据集
         /// </summary>
-        private Data Data;
+        public Data Data { get; set; }
 
         /// <summary>
         /// 存档目录
@@ -109,6 +109,7 @@ namespace RemoteKQ
         /// </summary>
         private void SaveData()
         {
+            this.Data.RemoveOldDays();
             this.Data.UserName = this.txtUserID.Text;
             if (Directory.Exists(dirPath) == false)
             {
@@ -193,7 +194,7 @@ namespace RemoteKQ
                 dataTable.Rows.Add(row);
             }
 
-            this.dgvInfo.DataSource = dataTable;
+            this.BindDgvInfoDataSource(dataTable);
         }
 
         /// <summary>
@@ -240,14 +241,41 @@ namespace RemoteKQ
             GetCaptcha();
         }
 
+        /// <summary>
+        /// 显示消息弹窗
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="title"></param>
         private void ShowMsgMeesageBox(string content, string title = "消息")
         {
             MessageBox.Show(content, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// 显示错误弹窗
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="title"></param>
         private void ShowErrorMeesageBox(string content, string title = "警告")
         {
             MessageBox.Show(content, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        /// <summary>
+        /// 更改dgv的数据源，防止多线程更改报错
+        /// </summary>
+        /// <param name="dt"></param>
+        private void BindDgvInfoDataSource(DataTable dt)
+        {
+            if (this.dgvInfo.InvokeRequired)
+            {
+                //Action和Func就是比delegate好用哈哈哈哈哈哈哈
+                this.Invoke(new Action<DataTable>(this.BindDgvInfoDataSource), new object[] { dt });
+            }
+            else
+            {
+                this.dgvInfo.DataSource = dt;
+            }
         }
         #endregion
 
@@ -439,9 +467,11 @@ namespace RemoteKQ
                 {
                     try
                     {
+                        var day = DateTime.Now;
                         var now = (int)DateTime.Now.TimeOfDay.TotalSeconds;
-                        if (now == (int)this.timeMorning.Value.TimeOfDay.TotalSeconds ||
-                            now == (int)this.timeEvening.Value.TimeOfDay.TotalSeconds)
+                        if (this.Data.IsCheckDay() && (
+                            now == (int)this.timeMorning.Value.TimeOfDay.TotalSeconds ||
+                            now == (int)this.timeEvening.Value.TimeOfDay.TotalSeconds))
                         {
                             var rand = new Random();
                             if (this.Data.RandMin < 1)
@@ -454,10 +484,14 @@ namespace RemoteKQ
 
                             CheckIN();
                         }
-                        Thread.Sleep(900);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        MessageBox.Show($"打卡失败，请检查\n{ex.Message}");
+                    }
+                    finally
+                    {
+                        Thread.Sleep(900);
                     }
                 }
             });
@@ -570,86 +604,20 @@ namespace RemoteKQ
         {
             this.Close();
         }
-        #endregion
-    }
-
-    /// <summary>
-    /// 数据集
-    /// </summary>
-    [DataContract]
-    internal class Data
-    {
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        [DataMember]
-        public string UserName { get; set; }
 
         /// <summary>
-        /// 登陆省份
+        /// 打卡计划设置
         /// </summary>
-        [DataMember]
-        public string Procity { get; set; }
-
-        /// <summary>
-        /// 早晨打卡时间
-        /// </summary>
-        [DataMember]
-        public DateTime MorningTime { get; set; }
-
-        /// <summary>
-        /// 晚上打卡时间
-        /// </summary>
-        [DataMember]
-        public DateTime EveningTime { get; set; }
-
-        /// <summary>
-        /// 随机时间
-        /// </summary>
-        [DataMember]
-        public int RandMin { get; set; }
-
-        /// <summary>
-        /// 地址字符串
-        /// </summary>
-        [DataMember]
-        public string LocationStr { get; set; }
-
-        /// <summary>
-        /// cookie集合
-        /// </summary>
-        [DataMember]
-        public List<Cookie> Cookies { get; set; }
-
-        /// <summary>
-        /// 唯一识别码
-        /// </summary>
-        [DataMember]
-        public string CheckCode { get; set; }
-
-        /// <summary>
-        /// 机器识别码
-        /// </summary>
-        [DataMember]
-        public string DevID { get; set; }
-
-        /// <summary>
-        /// 浏览器标识
-        /// </summary>
-        [DataMember]
-        public string UserAgent { get; set; }
-
-        /// <summary>
-        /// 初始化数据生成
-        /// </summary>
-        public Data()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCheckPlan_Click(object sender, EventArgs e)
         {
-            Cookies = new List<Cookie>();
-            CheckCode = Guid.NewGuid().ToString();
-            DevID = Guid.NewGuid().ToString().Replace("-", "");
-            UserAgent = @"Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI P7-L07 Build/HuaweiP7-L07) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36";
-            MorningTime = DateTime.Now;
-            EveningTime = DateTime.Now;
+            using (var frm = new FrmDateSelect())
+            {
+                frm.TopMost = true;
+                frm.ShowDialog(this);
+            }
         }
+        #endregion
     }
 }

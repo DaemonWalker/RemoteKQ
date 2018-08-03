@@ -30,7 +30,7 @@ namespace RemoteKQ
         private static Assembly LoadFromResource(string resName)
         {
             Assembly ass = Assembly.GetExecutingAssembly();
-            using (Stream stream = ass.GetManifestResourceStream("AutoPublish.Resources." + resName))
+            using (Stream stream = ass.GetManifestResourceStream("RemoteKQ.Resources." + resName))
             {
                 byte[] bt = new byte[stream.Length];
                 stream.Read(bt, 0, bt.Length);
