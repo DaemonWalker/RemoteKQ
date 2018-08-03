@@ -72,6 +72,7 @@
             this.btnTopForm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnCancelTopForm = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.linkHelp = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCaptcha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRandMin)).BeginInit();
@@ -362,6 +363,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.linkHelp);
             this.panel2.Controls.Add(this.dgvInfo);
             this.panel2.Controls.Add(this.btnSelectLocation);
             this.panel2.Controls.Add(this.drpLocation);
@@ -521,6 +523,18 @@
             this.btnExit.Text = "退出";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // linkHelp
+            // 
+            this.linkHelp.AutoSize = true;
+            this.linkHelp.Font = new System.Drawing.Font("宋体", 12F);
+            this.linkHelp.Location = new System.Drawing.Point(305, 23);
+            this.linkHelp.Name = "linkHelp";
+            this.linkHelp.Size = new System.Drawing.Size(200, 16);
+            this.linkHelp.TabIndex = 9;
+            this.linkHelp.TabStop = true;
+            this.linkHelp.Text = "点击查看使用说明和源代码";
+            this.linkHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkHelp_LinkClicked);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -590,6 +604,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnCheckPlan;
         public System.Windows.Forms.NotifyIcon iconDeskTop;
+        private System.Windows.Forms.LinkLabel linkHelp;
     }
 }
 

@@ -618,6 +618,17 @@ namespace RemoteKQ
                 frm.ShowDialog(this);
             }
         }
+
+        /// <summary>
+        /// 跳转到帮助页面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var url = @"https://github.com/DaemonWalker/RemoteKQ/";
+            System.Diagnostics.Process.Start(url);
+        }
         #endregion
     }
 }
